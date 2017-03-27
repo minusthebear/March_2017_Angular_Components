@@ -5,15 +5,16 @@
 		//template: "<h3>Guess what? It works!</h3>",
 		templateUrl: "/templates/users.component.html",
 		controllerAs: "vm",
-		controller: ["$http", controller]
+		controller: ["$http", "UsersService", controller]
 	});
 
-	function controller($http){
+	function controller($http, UsersService){
 		const vm = this;
 
 		vm.testing = "Hello Cruel World!";
 
 		vm.$onInit = function(){
+			vm.users = UsersService.all();
 		}
 	}
 })();
