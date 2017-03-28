@@ -26,7 +26,7 @@
 	    	})
 	      .state("profileComponent", {
 	        url: "/user/:id",
-	        component: "profileCo",
+	        component: "profileComponent",
 	        resolve: {
 	          resolvedUser: ["UsersService", "$q", "$stateParams", function(UsersService, $q, $stateParams){
 	            return UsersService.findById($stateParams.id).then(function(user){
