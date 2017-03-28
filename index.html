@@ -2,18 +2,19 @@
 
 <head>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    
+
+    <base href="/">
+
 </head>
 
 <body ng-cloak>
-    <component-app></component-app>
+    <div ui-view>You should not see me.</div>
 
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-component-router/angular_1_router.js"></script>
-    <script src="/bower_components/angular-component-router/ng_route_shim.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script type="text/javascript" src="javascripts/app.js"></script>
-    <script type="text/javascript" src="javascripts/component-app.component.js"></script>   
-    <script type="text/javascript" src="javascripts/users.component.js"></script>  
+    <script type="text/javascript" src="javascripts/users.component.js"></script>
+    <script type="text/javascript" src="javascripts/fourOFour.js"></script>  
     <script type="text/javascript" src="javascripts/services/users.service.js"></script> 
     <script type="text/javascript" src="javascripts/services/image.service.js"></script> 
                        
