@@ -1,5 +1,5 @@
 describe("profile.component", function(){
-	var profileComponent, ImageService, $q, $httpBackend, $state, resolvedUser, jazzSpy, IS,
+	var profileComponent, ImageService, $q, $httpBackend, $state, resolvedUser,
 		API = "http://pokeapi.co/api/v2/pokemon/";
 
 	var RESPONSE_SUCCESS = {
@@ -30,7 +30,7 @@ describe("profile.component", function(){
 	}));
 
 	describe("profileComponent should exist", function(){
-		var singleUser;
+		let singleUser;
 
 		beforeEach(inject(function(_$componentController_){
 			singleUser = { id: 2, name: "Erlich Bachman", email: "erlich@aviato.com", phone: 4155552233, pokemon: { isPresent: true, name: "celebi"}, icon: { isPresent: false, name: null} };
@@ -54,7 +54,6 @@ describe("profile.component", function(){
 
 			beforeEach(function(){
 				spyOn(ImageService, "findByName").and.callThrough();
-
 			});
 
 			it("should set state to resolvedUser", function(){
@@ -86,19 +85,22 @@ describe("profile.component", function(){
 		});
 	});
 	
-/*
-	describe("profileComponent with valid user and invalid Pokemon", function(){
-		var profileComponent, singleUser;
 
-		beforeEach(function(){
+	describe("profileComponent with valid user and invalid Pokemon", function(){
+		let singleUser;
+
+		beforeEach(inject(function(_$componentController_){
 			singleUser = { id: 2, name: "Erlich Bachman", email: "erlich@aviato.com", phone: 4155552233, pokemon: { isPresent: true, name: "deathmetaleagle"}, icon: { isPresent: false, name: null} };
+			let bindings = {resolvedUser: singleUser, ImageService: ImageService, $state: $state };
+			profileComponent = _$componentController_("profileComponent", { $scope: {} }, bindings);
 			spyOn(ImageService, "findByName").and.callThrough();
-			profileComponent = $controller("profileComponent", {resolvedUser: singleUser, ImageService: ImageService, $state: $state});
-		});
+		}));
+
 		// https://www.native-instruments.com/forum/data/avatars/m/328/328352.jpg?1439377390
 		it("should call findByName() and default to a placeholder image", function(){
 			expect(profileComponent.user.pokemon.image).toBeUndefined();
 
+			profileComponent.$onInit();
 			$httpBackend.whenGET(API + singleUser.pokemon.name).respond(404, $q.reject(RESPONSE_ERROR));
 			$httpBackend.flush();
 
@@ -108,14 +110,14 @@ describe("profile.component", function(){
 	});
 
 	describe("profileComponent with invalid user", function(){
-		var profileComponent, singleUser;
+		let singleUser;
 
-		beforeEach(function(){
+		beforeEach(inject(function(_$componentController_){
 			spyOn($state, "go");
 			spyOn(ImageService, "findByName");
-
-			profileComponent = $controller("profileComponent", { resolvedUser: singleUser, ImageService: ImageService, $state: $state});
-		});
+			let bindings = {resolvedUser: singleUser, ImageService: ImageService, $state: $state };
+			profileComponent = _$componentController_("profileComponent", { $scope: {} }, bindings);
+		}));
 
 		it("should redirect to 404", function(){
 			expect(profileComponent.user).toBeUndefined();
@@ -123,5 +125,5 @@ describe("profile.component", function(){
 			expect($state.go).toHaveBeenCalledWith("404");
 		});
 	});
-	*/
+
 });
