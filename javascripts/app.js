@@ -13,20 +13,23 @@
 	    // $qProvider.errorOnUnhandledRejections(false);
 
 	    $urlRouterProvider
-	    	.when("", "/usersComponent")
-	    	.when("/", "/usersComponent")
+	    	.when("", "/users")
+	    	.when("/", "/users")
 		    .otherwise(function($injector){
 		    	$injector.get("$state").go("404", {}, { location: false})
 		    });
 
 	    $stateProvider
-	    	.state("usersComponent", {
-	    		url: "/usersComponent",
+	    	.state("users", {
+	    		url: "/users",
 	    		component: "usersComponent"
 	    	})
-	      .state("profileComponent", {
+	      .state("profile", {
 	        url: "/user/:id",
 	        component: "profileComponent",
+	        bindings: { 
+	        	resolvedUser: "resolvedUser"
+	        },
 	        resolve: {
 	          resolvedUser: ["UsersService", "$q", "$stateParams", function(UsersService, $q, $stateParams){
 	            return UsersService.findById($stateParams.id).then(function(user){

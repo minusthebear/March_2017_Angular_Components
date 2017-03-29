@@ -48,11 +48,11 @@ describe("testing_app app.js file", function(){
 	describe("check to see if usersComponent is found", function(){
 		beforeEach(function(){
 			mockTemplate("templates/users.component.html");
-			stateName = "usersComponent";
+			stateName = "users";
 		});
 
 		it("should go to usersComponent state when usersComponent", function(){
-			goTo("/usersComponent");
+			goTo("/users");
 			expect($state.current.name).toEqual(stateName);
 		});
 
